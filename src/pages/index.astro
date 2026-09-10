@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LangSelector from '../components/LangSelector.astro';
+import Hero from '../components/Hero.astro';
+import SocialNav from '../components/SocialNav.astro';
+import SocialGrid from '../components/SocialGrid.astro';
+import Gallery from '../components/Gallery.astro';
+import Modals from '../components/Modals.astro';
+
+import img1 from '../IMAGENES/IMG 1.jpg';
+---
+
+<Layout title="Carla Romero">
+  <LangSelector />
+  <Hero name="Carla Romero" handle="@carlaromero" photo={img1.src} />
+  <SocialNav />
+  <SocialGrid />
+  <Gallery />
+  <Modals />
+</Layout>

@@ -1,0 +1,78 @@
+---
+import img1 from '../IMAGENES/IMG 1.jpg';
+import img2 from '../IMAGENES/IMG 2.jpg';
+import img3 from '../IMAGENES/IMG 3.jpg';
+import img4 from '../IMAGENES/IMG 4.jpg';
+import img5 from '../IMAGENES/IMG 5.jpeg';
+import img6 from '../IMAGENES/IMG 6.jpeg';
+import img7 from '../IMAGENES/IMG 7.jpeg';
+import img8 from '../IMAGENES/IMG 8.jpeg';
+
+const shots = [
+  { img: img1, alt: "Foto 1" },
+  { img: img2, alt: "Foto 2" },
+  { img: img3, alt: "Foto 3" },
+  { img: img4, alt: "Foto 4" },
+  { img: img5, alt: "Foto 5" },
+  { img: img6, alt: "Foto 6" },
+  { img: img7, alt: "Foto 7" },
+  { img: img8, alt: "Foto 8" },
+];
+---
+<div class="gallery-wrapper">
+  <button class="gallery-nav prev" id="galleryPrev" type="button" aria-label="Anterior" data-i18n-aria-label="galleryPrev">‹</button>
+  <section class="gallery" id="gallery">
+    {shots.map((shot) => (
+      <div class="shot">
+        <img src={shot.img.src} alt={shot.alt} loading="lazy" width="150" height="190" />
+      </div>
+    ))}
+  </section>
+  <button class="gallery-nav next" id="galleryNext" type="button" aria-label="Siguiente" data-i18n-aria-label="galleryNext">›</button>
+</div>
+
+<script is:inline>
+  const gallery = document.getElementById("gallery");
+  const prevBtn = document.getElementById("galleryPrev");
+  const nextBtn = document.getElementById("galleryNext");
+
+  if (prevBtn && nextBtn && gallery) {
+    prevBtn.addEventListener("click", () => {
+      gallery.scrollBy({ left: -200, behavior: "smooth" });
+    });
+    nextBtn.addEventListener("click", () => {
+      gallery.scrollBy({ left: 200, behavior: "smooth" });
+    });
+  }
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  if (gallery) {
+    gallery.addEventListener("mousedown", (e) => {
+      isDown = true;
+      gallery.style.cursor = "grabbing";
+      startX = e.pageX - gallery.offsetLeft;
+      scrollLeft = gallery.scrollLeft;
+    });
+    
+    gallery.addEventListener("mouseleave", () => {
+      isDown = false;
+      gallery.style.cursor = "grab";
+    });
+    
+    gallery.addEventListener("mouseup", () => {
+      isDown = false;
+      gallery.style.cursor = "grab";
+    });
+    
+    gallery.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - gallery.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      gallery.scrollLeft = scrollLeft - walk;
+    });
+  }
+</script>

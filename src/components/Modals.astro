@@ -1,0 +1,40 @@
+---
+---
+<!-- MODAL PRÓXIMAMENTE -->
+<div class="modal-overlay" id="soonModal">
+  <div class="modal-box">
+    <div class="modal-badge" style="background: linear-gradient(135deg, rgba(255, 111, 181, 0.2), rgba(233, 30, 140, 0.2)); border: 1px solid rgba(255, 111, 181, 0.4); box-shadow: 0 0 20px rgba(255, 111, 181, 0.3);">✨</div>
+    <div class="modal-title" data-i18n="soonTitle">Muy pronto</div>
+    <div class="modal-text" data-i18n="soonText">¡Próximamente más contenido exclusivo para ustedes! Mantente al tanto. ❤</div>
+    <div class="modal-buttons">
+      <button class="modal-btn confirm" id="soonCloseBtn" type="button" data-i18n="soonClose">Entendido</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const soonModal = document.getElementById("soonModal");
+  const soonCloseBtn = document.getElementById("soonCloseBtn");
+
+  window.abrirProximamente = function(e) {
+    if (e) e.preventDefault();
+    if (soonModal) soonModal.classList.add("open");
+  };
+
+  window.cerrarProximamente = function() {
+    if (soonModal) soonModal.classList.remove("open");
+  };
+
+  if (soonCloseBtn) {
+    soonCloseBtn.addEventListener("click", () => {
+      window.cerrarProximamente();
+    });
+  }
+
+  if (soonModal) {
+    soonModal.addEventListener("click", (e) => {
+      if (e.target === soonModal) window.cerrarProximamente();
+    });
+  }
+</script>
+

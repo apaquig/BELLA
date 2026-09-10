@@ -1,0 +1,43 @@
+---
+interface Props {
+  name?: string;
+  handle?: string;
+  photo?: string;
+}
+
+const { 
+  name = "Carla Romero", 
+  handle = "@carlaromero", 
+  photo = "" 
+} = Astro.props;
+---
+<header class="hero">
+  {photo ? (
+    <img 
+      class="photo" 
+      src={photo} 
+      alt={name} 
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      width="800"
+      height="1040"
+      data-i18n-alt="heroAlt"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+    />
+  ) : null}
+
+  <div class="placeholder-hero" style={photo ? "display: none;" : "display: flex;"}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+      <circle cx="12" cy="7" r="4"></circle>
+    </svg>
+    <span>Foto principal de Carla Romero</span>
+  </div>
+
+  <div class="fade"></div>
+  <div class="id">
+    <h1 id="name">{name} <span class="badge">✔</span></h1>
+    <div class="handle" id="handle">{handle}</div>
+  </div>
+</header>
